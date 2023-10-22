@@ -16,6 +16,7 @@ func main() {
 	}
 
 	db.ConnectDB()
+	db.Migrate()
 
 	os.MkdirAll("upload/products", 0755)
 	r := gin.Default()

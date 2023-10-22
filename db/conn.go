@@ -1,6 +1,7 @@
 package db
 
 import (
+	"go-RESTful01/model"
 	"log"
 	"os"
 
@@ -20,4 +21,13 @@ func ConnectDB() {
 	}
 
 	Conn = db
+}
+
+func Migrate() {
+	Conn.AutoMigrate(
+		&model.Category{},
+		&model.Order{},
+		&model.OrderItem{},
+		&model.Product{},
+	)
 }
