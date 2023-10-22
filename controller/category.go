@@ -87,7 +87,6 @@ func (c *Category) Update(ctx *gin.Context) {
 		ID:   category.ID,
 		Name: category.Name,
 	})
-
 }
 
 func (c *Category) Delete(ctx *gin.Context) {
