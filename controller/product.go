@@ -34,7 +34,7 @@ func (p *Product) FindAll(ctx *gin.Context) {
 	if status != "" {
 		query = query.Where("status = ?", status)
 	}
-	query.Find(&products)
+	query.Order("created_at desc").Find(&products)
 
 	var result []dto.ReadProductResponse
 	for _, product := range products {
