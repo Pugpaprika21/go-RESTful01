@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -18,8 +19,13 @@ func main() {
 	db.ConnectDB()
 	db.Migrate()
 
-	os.MkdirAll("upload/products", 0755)
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowAllOrigins = true
+
+	os.MkdirAll("uploads/products", 0755)
 	r := gin.Default()
+	r.Use(cors.New(corsConfig))
+	r.Static("/uploads", "./uploads")
 	serveRoutes(r)
-	r.Run()
+	r.Run(":" + os.Getenv("PORT"))
 }

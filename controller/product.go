@@ -94,7 +94,7 @@ func (p *Product) Create(ctx *gin.Context) {
 		return
 	}
 
-	imagePath := "./upload/products/" + uuid.New().String()
+	imagePath := "./uploads/products/" + uuid.New().String()
 	ctx.SaveUploadedFile(image, imagePath)
 
 	product := model.Product{
@@ -147,7 +147,7 @@ func (p *Product) Update(ctx *gin.Context) {
 	}
 
 	if image != nil {
-		imagePath := "./upload/products/" + uuid.New().String()
+		imagePath := "./uploads/products/" + uuid.New().String()
 		ctx.SaveUploadedFile(image, imagePath)
 		os.Remove(product.Image)
 		product.Image = imagePath
