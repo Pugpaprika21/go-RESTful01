@@ -91,7 +91,8 @@ func (c *Category) Update(ctx *gin.Context) {
 
 func (c *Category) Delete(ctx *gin.Context) {
 	id := ctx.Param("id")
-	db.Conn.Delete(&model.Category{}, id)
+	//db.Conn.Unscoped().Delete(&model.Category{}, id) // delete
+	db.Conn.Delete(&model.Category{}, id) // soft delete
 
 	ctx.JSON(http.StatusOK, gin.H{"deleteAt": time.Now()})
 }
