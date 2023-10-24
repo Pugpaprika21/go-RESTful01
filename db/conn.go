@@ -1,7 +1,7 @@
 package db
 
 import (
-	"go-TodoList/model"
+	"go-RESTful01/model"
 	"log"
 	"os"
 
@@ -25,7 +25,9 @@ func ConnectDB() {
 
 func Migrate() {
 	Conn.AutoMigrate(
-		&model.User{},
-		&model.Todo{},
+		&model.Category{},
+		&model.Order{},
+		&model.OrderItem{},
+		&model.Product{},
 	)
 }

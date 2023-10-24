@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-TodoList/db"
+	"go-RESTful01/db"
 	"log"
 	"os"
 

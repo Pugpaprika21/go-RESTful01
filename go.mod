@@ -1,4 +1,4 @@
-module go-TodoList
+module go-RESTful01
 
 go 1.21.1
 
