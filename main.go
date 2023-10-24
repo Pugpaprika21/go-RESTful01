@@ -1,11 +1,13 @@
 package main
 
 import (
-	"go-RESTful01/db"
+	"go-TodoList/db"
 	"log"
 	"os"
 
-	"github.com/gin-contrib/cors"
+	//"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -23,13 +25,13 @@ func main() {
 	db.ConnectDB()
 	db.Migrate()
 
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true
-
-	os.MkdirAll("uploads/products", 0755)
 	r := gin.Default()
-	r.Use(cors.New(corsConfig))
-	r.Static("/uploads", "./uploads")
+
+	store := cookie.NewStore([]byte("secret"))
+	r.Use(sessions.Sessions("mysession", store))
+	r.LoadHTMLGlob("view/**/*")
+	r.Static("/assets", "./assets")
+
 	serveRoutes(r)
 
 	port := os.Getenv("PORT")
